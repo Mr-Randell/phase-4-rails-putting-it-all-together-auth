@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :invalid_records
+skip_before_action :authorize, only: :create
+
   def create
     user = User.create!(user_params)
     if user.valid?
@@ -11,12 +13,13 @@ rescue_from ActiveRecord::RecordInvalid, with: :invalid_records
   end
 
   def show
-    user = User.find_by(id: session[:user_id])
-    if user
-      return render json: user, status: 201
-    else
-      render json: { error: "Unauthorized! Kindliy Login..." }, status: 401
-    end
+    # user = User.find_by(id: session[:user_id])
+    # if user
+    #   return render json: user, status: 201
+    # else
+    #   render json: { error: "Unauthorized! Kindliy Login..." }, status: 401
+    # end
+    render json: @current_user
   end
 
   private
