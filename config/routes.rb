@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   get "/recipes", to: "recipes#index"
 
   # Create new recipe
-  post "/recipes", to: "recipes#create"
+  post "/recipes", to: "recipes#create" 
 end
